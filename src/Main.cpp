@@ -1,25 +1,9 @@
-# TinyECS
-
-### Intro
-Tiny Entity Component System.
-
-### How to run
-#### Path：
-- Windows 10 or later
-- CMake 3.23.0
-- gcc 8.1.0 (MinGW-W64)
-
-#### Run
-Only double-click Run.bat
-
-### Demo
-```cpp
 #include <ctime>
 #include <iostream>
 
 #include "World.h"
 
-// custom Components
+// 自定义两个组件
 struct CompA
 {
 	float x;
@@ -32,18 +16,18 @@ struct CompB
 	int b;
 };
 
-// custom TestSys
-// need to be inherited from class System
-// if not, will not be able to call RegisterSys successfully
+// 自定义一个系统
+// 需要继承自 System 类
+// 否则无法进行注册
 struct TestSys : public System
 {
-	// override
-	void OnUpdate(float dt) override
+	// 重写更新方法
+	void OnUpdate(float dt)
 	{
-		// use variable entitys to traverse all entities
+		// 通过 entitys 集合遍历实体列表
 		for (auto entity : entitys)
 		{
-			// use pointer world to operating entity
+			// 通过 world 指针操作实体的组件
 			world->GetComp<CompA>(entity).x += 1;
 			world->GetComp<CompA>(entity).y += 1;
 			world->GetComp<CompB>(entity).a += 2;
@@ -54,14 +38,14 @@ struct TestSys : public System
 
 int main(int argc, char *argv[])
 {
-	// define a World
+	// 创建一个世界
 	World w;
-	// create a entity
+	// 创建一个实体
 	Entity test = w.CreateEntity();
-	// add components to entity that named test
+	// 为实体添加两个组件
 	w.AtachComp<CompA>(test, CompA{0.0f, 0.0f});
 	w.AtachComp<CompB>(test, CompB{0, 0});
-	// use the signature of test to call RegisterSys
+	// 使用实体 test 的签名注册一个系统
 	w.RegisterSys<TestSys>(w.GetEntitySignature(test));
 
 	float dt = 0.0f;
@@ -70,8 +54,8 @@ int main(int argc, char *argv[])
 		auto start_time = clock();
 		w.Update(dt);
 		dt = clock() - start_time;
-		// if the registered TestSys is working
-		// CompA's x is always 1/2 of CompB's a
+		// 查看实体的组件信息
+		// 若一切正常则 CompA 的组件信息总是 CompB 的 1/2
 		std::cout << "CompA: "
 				  << w.GetComp<CompA>(test).x 
 				  << "  CompB: " 
@@ -81,5 +65,3 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
-
-```
