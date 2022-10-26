@@ -1,18 +1,19 @@
 # TinyECS
+[![license](https://img.shields.io/github/license/zhtsu/TinyECS)](LICENSE) 
 
-### Intro
+## Intro
 Tiny Entity Component System.
 
-### How to run
-#### Path：
+## How to run
+### Environment：
 - Windows 10 or later
 - CMake 3.23.0
 - gcc 8.1.0 (MinGW-W64)
 
-#### Run
+### Run
 Only double-click Run.bat
 
-### Demo
+## Usage sample
 ```cpp
 #include <ctime>
 #include <iostream>
