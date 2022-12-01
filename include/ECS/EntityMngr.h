@@ -32,7 +32,7 @@ public:
     /* 
       获取到拥有指定签名的所有实体
     */ 
-    std::set<EntityId> GetEntitys(Signature sig);
+    std::set<EntityId> GetEntities(Signature sig);
 
     /* 
       获取一个实体的签名

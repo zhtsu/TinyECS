@@ -13,7 +13,7 @@ class World;
   用于实体信息发生变更时
   决定怎样去更新系统关注的实体集合
 */ 
-enum class UpdateEntitysType
+enum class UpdateEntitiesType
 {
     // @TODO: 
     // 目前实体被创建时默认使用空签名，不被任何系统订阅
@@ -42,7 +42,7 @@ struct System
     // 系统所属的世界，用来操作实体
     World* world;
     // 系统关注的实体
-    std::set<Entity> entitys;
+    std::set<Entity> entities;
 };
 
 /* 
@@ -79,14 +79,14 @@ public:
       \param entity      变更的实体
       \param signature   实体目前的签名
     */ 
-    void UpdateEntitys(UpdateEntitysType update_type, Entity entity, Signature signature);
+    void UpdateEntities(UpdateEntitiesType update_type, Entity entity, Signature signature);
 
     /*
       这是提供给 World 类调用的函数
       以确保 World 注册一个系统时可以为其设置实体集合
     */
    template<class T>
-    void SetEntitys(std::set<Entity> entitys);
+    void SetEntities(std::set<Entity> entities);
 
 private:
     // 每个系统关注的实体签名，用来决定系统关注哪些实体
@@ -115,9 +115,9 @@ void SystemMngr::Register(Signature signature, World* world)
 }
 
 template<class T>
-void SystemMngr::SetEntitys(std::set<Entity> entitys)
+void SystemMngr::SetEntities(std::set<Entity> entities)
 {
     const char* type_name = typeid(T).name();
     // 更新系统订阅的实体集合
-    m_type_to_system.find(type_name)->second->entitys = entitys;
+    m_type_to_system.find(type_name)->second->entities = entities;
 }

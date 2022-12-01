@@ -16,7 +16,7 @@ void World::DestroyEntity(Entity entity)
     m_entity_mngr->DestroyEntity(entity);
     // 更新系统的实体集合
     // 实体被销毁时不需要使用到第三个参数，传递空签名即可
-    m_system_mngr->UpdateEntitys(UpdateEntitysType::ENTITY_DESTROYED, entity, Signature());
+    m_system_mngr->UpdateEntities(UpdateEntitiesType::ENTITY_DESTROYED, entity, Signature());
 }
 
 Signature World::GetEntitySignature(Entity entity)
@@ -24,9 +24,9 @@ Signature World::GetEntitySignature(Entity entity)
     return m_entity_mngr->GetSignature(entity);
 }
 
-std::set<EntityId> World::GetEntitys(Signature signature)
+std::set<EntityId> World::GetEntities(Signature signature)
 {
-    return m_entity_mngr->GetEntitys(signature);
+    return m_entity_mngr->GetEntities(signature);
 }
 
 void World::Update(float dt)

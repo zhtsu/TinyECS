@@ -24,8 +24,8 @@ struct TestSys : public System
 	// 重写更新方法
 	void OnUpdate(float dt)
 	{
-		// 通过 entitys 集合遍历实体列表
-		for (auto entity : entitys)
+		// 通过 entities 集合遍历实体列表
+		for (auto entity : entities)
 		{
 			// 通过 world 指针操作实体的组件
 			world->GetComp<CompA>(entity).x += 1;

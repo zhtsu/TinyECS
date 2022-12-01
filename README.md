@@ -42,7 +42,7 @@ struct TestSys : public System
 	void OnUpdate(float dt) override
 	{
 		// use variable entitys to traverse all entities
-		for (auto entity : entitys)
+		for (auto entity : entities)
 		{
 			// use pointer world to operating entity
 			world->GetComp<CompA>(entity).x += 1;

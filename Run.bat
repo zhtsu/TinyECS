@@ -1,3 +1,4 @@
+@echo off
 if not exist build md build
 cd build
 if exist CMakeCache.txt del CMakeCache.txt

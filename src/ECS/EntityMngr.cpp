@@ -56,7 +56,7 @@ void EntityMngr::DestroyEntity(EntityId eid)
     }
 }
 
-std::set<EntityId> EntityMngr::GetEntitys(Signature sig)
+std::set<EntityId> EntityMngr::GetEntities(Signature sig)
 {
     unsigned long sig_long = sig.to_ulong();
     if (m_signature_to_eids.find(sig_long) == m_signature_to_eids.end())

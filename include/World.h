@@ -33,7 +33,7 @@ public:
     /*
       根据签名获取实体集合
     */
-   std::set<EntityId> GetEntitys(Signature signature);
+   std::set<EntityId> GetEntities(Signature signature);
 
     /* 
       模板函数
@@ -90,7 +90,7 @@ T& World::AtachComp(Entity entity, T comp)
     // 获取当前实体的签名
     Signature signature = m_entity_mngr->GetSignature(entity);
     // 实体签名变更，更新系统订阅的实体集合
-    m_system_mngr->UpdateEntitys(UpdateEntitysType::ENTITY_SIGNATURE_UPDATED, entity, signature);
+    m_system_mngr->UpdateEntities(UpdateEntitiesType::ENTITY_SIGNATURE_UPDATED, entity, signature);
     
     return m_entity_mngr->GetComp<T>(entity);
 }
@@ -100,7 +100,7 @@ void World::DeAtachComp(Entity entity)
 {
     m_entity_mngr->DeAtachComp<T>(entity);
     Signature signature = m_entity_mngr->GetSignature(entity);
-    m_system_mngr->UpdateEntitys(UpdateEntitysType::ENTITY_SIGNATURE_UPDATED, entity, signature);
+    m_system_mngr->UpdateEntities(UpdateEntitiesType::ENTITY_SIGNATURE_UPDATED, entity, signature);
 }
 
 template<class T>
@@ -120,5 +120,5 @@ void World::RegisterSys(Signature signature)
 {
     m_system_mngr->Register<T>(signature, this);
     // 注册系统之后更新系统关注的实体
-    m_system_mngr->SetEntitys<T>(m_entity_mngr->GetEntitys(signature));
+    m_system_mngr->SetEntities<T>(m_entity_mngr->GetEntities(signature));
 }
