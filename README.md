@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 {
 	// Define a World
 	World w;
-	// create a entity
+	// Create a entity
 	Entity test = w.CreateEntity();
 	// Add components to entity that named test
 	w.AtachComp<CompA>(test, CompA{0.0f, 0.0f});
